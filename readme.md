@@ -1,5 +1,9 @@
 # Gousto API
 
+1. This readme file.
+2. [Installation](installation.md)
+3. [API Documentation](instructions.md) 
+
 ## Scenario
 
 Gousto’s technical infrastructure includes an API Gateway. The gateway offers a number of recipe operations. Recipes contain a lot of information such as cuisine, customer ratings & comments, stock levels and diet types.
