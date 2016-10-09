@@ -18,7 +18,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
     | Method | URI | Arguments | Options | Expected Output |
     |--------|-----|-----------|---------|-----------------|
-    | GET    | 1   | 2         | 3       | 4               |
+    | GET    | recipes   | 2         | 3       | 4               |
     | POST   | 5   | 6         | 7       | 8               |
     | PATCH  | 9   | 10        | 11      | 12              |
 

@@ -27,13 +27,11 @@ I chose to use Laravel as that is what I have been working with for the last fou
 
 My solution meets the listed requirements fully, however I would not consider it 'production ready' as it does not address the following.
 
-#### Persistence
-
-##### Updating a Recipe
+#### Persistence - Updating a Recipe
 
 When a recipe is updated, the changes are not persisted as this was not a requirement. It is usually something that would be carried out with a database of some description. However the API does make reasonable effort to validate the request.
 
-##### Rating a Recipe
+#### Persistence - Rating a Recipe
 
 Although the API end point responds to a rating request for a recipe, the data is not persisted in any way. As above, reasonable efforts are made to validate the request such that:
 
