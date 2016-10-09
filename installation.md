@@ -9,3 +9,29 @@
 5. [Report](report.md) 
 
 ## Installation
+
+
+
+1. Clone this repository
+
+```
+git clone https://github.com/mstnorris/GoustoAPI-Dev goustoapi.dev
+```
+
+2. Install dependencies
+
+```
+composer install
+```
+
+3. Create an environment file
+
+```
+cp .env.example .env
+```
+
+4. Generate Application Key
+
+```
+php artisan key:generate
+```

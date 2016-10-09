@@ -14,7 +14,7 @@
 
 Prepend all URIs with `/api/v1` for version 1 of the api.
 
-#### Fetch all recipes
+### Fetch all recipes
 
     | Method | URI | Arguments | Options | Expected Output |
     |--------|-----|-----------|---------|-----------------|
@@ -24,13 +24,13 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 `recipes`
 
-#### Fetch a recipe by id
+### Fetch a recipe by id
 
 `recipes/{id}`
 
-#### Fetch all recipes for a specific cuisine (should paginate) Rate an existing recipe between 1 and 5
+### Fetch all recipes for a specific cuisine (should paginate) Rate an existing recipe between 1 and 5
 
 `recipes?cuisine={cuisine}`
 
-#### Update an existing recipe
-#### Store a new recipe
+### Update an existing recipe
+### Store a new recipe
