@@ -32,4 +32,4 @@ Currently anyone can access the API; retrieving recipe information, updating a r
 
 #### Validation
 
-I made informed decisions as to what the validations rules should be when updating/creating a recipe. I have since commented them out for 'ease-of-use' of this demo. Please see the validation rules in the (RecipeController)['https://github.com/mstnorris/GoustoAPI-Dev/blob/master/app/Http/Controllers/API/v1/RecipeController.php#L44']
+I made informed decisions as to what the validations rules should be when updating/creating a recipe. I have since commented them out for 'ease-of-use' of this demo. Please see the validation rules in the (RecipeController)[https://github.com/mstnorris/GoustoAPI-Dev/blob/master/app/Http/Controllers/API/v1/RecipeController.php#L44]
