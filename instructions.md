@@ -8,7 +8,7 @@
 4. [API Documentation](instructions.md)
 5. [Report](report.md) 
 
-## Instructions
+## Instructions (API Endpoints)
 
 ### Version 1
 
