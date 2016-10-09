@@ -17,5 +17,9 @@ Route::group(['namespace' => 'API\v1', 'prefix' => 'v1'], function () {
     Route::get('recipes', 'RecipeController@index');
     Route::get('recipes/{id}', 'RecipeController@show');
     Route::post('recipes', 'RecipeController@store');
+    Route::patch('recipes/{id}', 'RecipeController@update');
+    Route::post('recipes/{id}', 'RecipeController@rate');
+
+
 
 });
