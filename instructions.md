@@ -15,19 +15,10 @@
 Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Fetch all recipes
-```
-| Method | URI | Arguments | Options | Expected Output |
-| --- | --- |
-| Content Cell | Content Cell | Content Cell | Content Cell | Content Cell |
-```
 
     | Method | URI | Arguments | Options | Expected Output |
-    |--------|-----|-----------|---------|-----------------|
-    | GET    | recipes   | 2         | 3       | 4               |
-    | POST   | 5   | 6         | 7       | 8               |
-    | PATCH  | 9   | 10        | 11      | 12              |
-
-`recipes`
+    | --- | --- |
+    | Content Cell | Content Cell | Content Cell | Content Cell | Content Cell |
 
 ### Fetch a recipe by id
 
