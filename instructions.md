@@ -16,10 +16,10 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Fetch all recipes
 
-| Operation | Method | URI | Arguments | Options | Expected Output |
-| --- | --- | --- | --- | --- | --- | --- |
-| Fetch all Recipes | GET | recipes | NONE | NONE | JSON representation of all recipes |
-| Fetch a Recipe by ID | GET | recipes/{id} | integer | NONE | JSON representation of selected recipe |
-| Fetch all recipes for a specific cuisine (should paginate) Rate an existing recipe between 1 and 5 | GET | recipes?cuisine={cuisine} | NONE | NONE | JSON representation of selected recipe |
-| Update an existing recipe | PATCH | recipes/{id} | integer | NONE | JSON representation of all recipes |
-| Store a new Recipe | POST | recipes | NONE | NONE | JSON representation of all recipes |
+| Operation | Method | URI | Arguments |
+| --- | --- | --- | --- | --- |
+| Fetch all Recipes | GET | recipes | NONE |
+| Fetch a Recipe by ID | GET | recipes/{id} | integer |
+| Fetch all recipes for a specific cuisine (should paginate) Rate an existing recipe between 1 and 5 | GET | recipes?cuisine={cuisine} | string |
+| Update an existing recipe | PATCH | recipes/{id} | integer |
+| Store a new Recipe | POST | recipes | NONE |
