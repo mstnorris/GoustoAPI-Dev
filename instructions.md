@@ -27,7 +27,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Fetch all Recipes
 
-**/recipes**
+**GET** */recipes*
 
 ```json
 [
@@ -58,8 +58,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
     "recipe_cuisine": "asian",
     "in_your_box": "",
     "gousto_reference": "59"
-  }
-  ...
+  },
   {
     "id": 10,
     "created_at": "05/07/2015 17:58:00",
@@ -93,7 +92,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Fetch a Recipe by ID
 
-**/recipes/{id}**
+**GET** */recipes/{id}*
 
 ```json
 {
@@ -128,7 +127,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Fetch all recipes for a specific cuisine (should paginate)
 
-**recipes?cuisine={cuisine}&page={integer}**
+**GET** */recipes?cuisine={cuisine}&page={integer}*
 
 ```json
 {
@@ -200,3 +199,15 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
   }
 }
 ```
+
+### Rate an existing recipe between 1 and 5
+
+**POST** */recipes/{id}*
+
+### Update an existing recipe
+
+**PATCH** */recipes/{id}*
+
+### Store a new Recipe
+
+**POST** */recipes*
