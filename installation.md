@@ -10,28 +10,28 @@
 
 ## Installation
 
-
+I'm using Laravel Homestead for local development. This is nothing more than a wrapper for Vagrant. Please consult the [documentation](https://laravel.com/docs/5.3/homestead#installation-and-setup) if you are unfamiliar.
 
 1. Clone this repository
 
-```
-git clone https://github.com/mstnorris/GoustoAPI-Dev goustoapi.dev
-```
+    ```
+    git clone https://github.com/mstnorris/GoustoAPI-Dev goustoapi.dev
+    ```
 
 2. Install dependencies
 
-```
-composer install
-```
+    ```
+    composer install
+    ```
 
 3. Create an environment file
 
-```
-cp .env.example .env
-```
+    ```
+    cp .env.example .env
+    ```
 
 4. Generate Application Key
 
-```
-php artisan key:generate
-```
+    ```
+    php artisan key:generate
+    ```
