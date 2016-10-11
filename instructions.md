@@ -25,7 +25,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 | Update an existing recipe | PATCH | recipes/{id} | integer |
 | Store a new Recipe | POST | recipes | Data for a new Recipe (see `$fillable` property in Recipe.php model) |
 
-#### Fetch all Recipes
+### Fetch all Recipes
 
 **/recipes**
 
@@ -91,7 +91,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 ]
 ```
 
-#### Fetch a Recipe by ID
+### Fetch a Recipe by ID
 
 **/recipes/{id}**
 
@@ -126,7 +126,7 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 }
 ```
 
-#### Fetch all recipes for a specific cuisine (should paginate)
+### Fetch all recipes for a specific cuisine (should paginate)
 
 **recipes?cuisine={cuisine}&page={integer}**
 
