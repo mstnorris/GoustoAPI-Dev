@@ -20,6 +20,4 @@ Route::group(['namespace' => 'API\v1', 'prefix' => 'v1'], function () {
     Route::patch('recipes/{id}', 'RecipeController@update');
     Route::post('recipes/{id}', 'RecipeController@rate');
 
-
-
 });

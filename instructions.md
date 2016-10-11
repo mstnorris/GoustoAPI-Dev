@@ -21,8 +21,8 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 | Fetch all Recipes | GET | recipes | NONE |
 | Fetch a Recipe by ID | GET | recipes/{id} | integer |
 | Fetch all recipes for a specific cuisine (should paginate) | GET | recipes?cuisine={cuisine} | string |
-| Rate an existing recipe between 1 and 5 | POST | recipes/{id} | integer |
-| Update an existing recipe | PATCH | recipes/{id} | integer |
+| Rate an existing recipe between 1 and 5 | POST | recipes/{id} | integer (form-data) **key**=rating **value**={integer} |
+| Update an existing recipe | PATCH | recipes/{id} | integer (x-www-form-urlencoded) |
 | Store a new Recipe | POST | recipes | Data for a new Recipe (see `$fillable` property in Recipe.php model) |
 
 ### Fetch all Recipes
@@ -202,11 +202,78 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 ### Rate an existing recipe between 1 and 5
 
-**POST** */recipes/{id}*
+**POST (form-data)** */recipes/{id}*
+
+```json
+{
+  "recipe": {
+    "id": 3,
+    "created_at": "30/06/2015 17:58:00",
+    "updated_at": "30/06/2015 17:58:00",
+    "box_type": "vegetarian",
+    "title": "Umbrian Wild Boar Salami Ragu with Linguine",
+    "slug": "umbrian-wild-boar-salami-ragu-with-linguine",
+    "short_title": "",
+    "marketing_description": "This delicious pasta dish comes from the Italian region of Umbria. It has a smoky and intense wild boar flavour which combines the earthy garlic, leek and onion flavours, while the chilli flakes add a nice deep aroma. Enjoy within 5-6 days of delivery.",
+    "calories_kcal": "609",
+    "protein_grams": "17",
+    "fat_grams": "29",
+    "carbs_grams": "0",
+    "bulletpoint1": "",
+    "bulletpoint2": "",
+    "bulletpoint3": "",
+    "recipe_diet_type_id": "meat",
+    "season": "all",
+    "base": "pasta",
+    "protein_source": "pork",
+    "preparation_time_minutes": "35",
+    "shelf_life_days": "4",
+    "equipment_needed": "Appetite",
+    "origin_country": "Great Britain",
+    "recipe_cuisine": "british",
+    "in_your_box": "",
+    "gousto_reference": "1"
+  },
+  "rating": {
+    "rating": "3"
+  }
+}
+```
 
 ### Update an existing recipe
 
-**PATCH** */recipes/{id}*
+**PATCH (x-www-form-urlencoded)** */recipes/{id}*
+
+```json
+{
+  "id": 3,
+  "created_at": "30/06/2015 17:58:00",
+  "updated_at": "30/06/2015 17:58:00",
+  "box_type": "vegetarian",
+  "title": "Updated Title",
+  "slug": "umbrian-wild-boar-salami-ragu-with-linguine",
+  "short_title": "",
+  "marketing_description": "This delicious pasta dish comes from the Italian region of Umbria. It has a smoky and intense wild boar flavour which combines the earthy garlic, leek and onion flavours, while the chilli flakes add a nice deep aroma. Enjoy within 5-6 days of delivery.",
+  "calories_kcal": "609",
+  "protein_grams": "17",
+  "fat_grams": "29",
+  "carbs_grams": "0",
+  "bulletpoint1": "",
+  "bulletpoint2": "",
+  "bulletpoint3": "",
+  "recipe_diet_type_id": "meat",
+  "season": "all",
+  "base": "pasta",
+  "protein_source": "pork",
+  "preparation_time_minutes": "35",
+  "shelf_life_days": "4",
+  "equipment_needed": "Appetite",
+  "origin_country": "Great Britain",
+  "recipe_cuisine": "british",
+  "in_your_box": "",
+  "gousto_reference": "1"
+}
+```
 
 ### Store a new Recipe
 
