@@ -10,11 +10,19 @@
 
 ## Instructions
 
-### Version 1
+### Testing
+
+Run the tests. There are 6 tests with 96 assertions. Although not exhaustive, they provide an insight and a good base for developing the core codebase further. The tests can be viewed in the [ParseCsvFileIntoRecipeObjectsTest.php](/Users/Mike/Code/Laravel/GoustoAPI-Dev/tests/features/ParseCsvFileIntoRecipeObjectsTest.php) file. 
+
+```
+phpunit
+```
+
+### API Version 1
 
 Prepend all URIs with `/api/v1` for version 1 of the api.
 
-### API Operations & Endpoints
+### Operations & Endpoints
 
 | Operation | Method | URI | Arguments & Data |
 | --- | --- | --- | --- | --- |
