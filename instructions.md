@@ -18,15 +18,28 @@ Prepend all URIs with `/api/v1` for version 1 of the api.
 
 | Method | URI | Arguments | Options | Expected Output |
 | --- | --- | --- | --- | --- | --- |
-| Content Cell | Content Cell | Content Cell | Content Cell | Content Cell |
+| GET | recipes | NONE | NONE | JSON representation of all recipes |
 
 ### Fetch a recipe by id
 
-`recipes/{id}`
+| Method | URI | Arguments | Options | Expected Output |
+| --- | --- | --- | --- | --- | --- |
+| GET | recipes/{id} | integer | NONE | JSON representation of selected recipe |
 
 ### Fetch all recipes for a specific cuisine (should paginate) Rate an existing recipe between 1 and 5
 
-`recipes?cuisine={cuisine}`
+| Method | URI | Arguments | Options | Expected Output |
+| --- | --- | --- | --- | --- | --- |
+| GET | recipes?cuisine={cuisine} | NONE | NONE | JSON representation of selected recipe |
 
 ### Update an existing recipe
+
+| Method | URI | Arguments | Options | Expected Output |
+| --- | --- | --- | --- | --- | --- |
+| PATCH | recipes/{id} | integer | NONE | JSON representation of all recipes |
+
 ### Store a new recipe
+
+| Method | URI | Arguments | Options | Expected Output |
+| --- | --- | --- | --- | --- | --- |
+| POST | recipes | NONE | NONE | JSON representation of all recipes |
