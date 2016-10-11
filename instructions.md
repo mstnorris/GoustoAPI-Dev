@@ -8,13 +8,13 @@
 4. [API Documentation](instructions.md)
 5. [Report](report.md) 
 
-## Instructions (API Endpoints)
+## Instructions
 
 ### Version 1
 
 Prepend all URIs with `/api/v1` for version 1 of the api.
 
-### Fetch all recipes
+### (API Endpoints)
 
 | Operation | Method | URI | Arguments |
 | --- | --- | --- | --- | --- |
