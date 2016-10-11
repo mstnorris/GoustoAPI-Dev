@@ -2,8 +2,6 @@
 
 namespace App;
 
-use File;
-use League\Csv\Reader;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model

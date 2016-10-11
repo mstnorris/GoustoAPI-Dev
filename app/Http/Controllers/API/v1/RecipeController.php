@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Recipe;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -21,11 +22,20 @@ class RecipeController extends Controller
         return response($data, $statusCode, ['Content-Type' => 'application/json']);
     }
 
+    protected function paginate($items, $itemsPerPage = 2)
+    {
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $currentPagesItems = $items->slice(($currentPage - 1) * $itemsPerPage, $itemsPerPage);
+
+        return new LengthAwarePaginator($currentPagesItems, count($items), $itemsPerPage);
+    }
+
     public function index()
     {
         $cuisine = request('cuisine');
 
-        $recipes = $cuisine ? $this->recipes->where('recipe_cuisine', '=', $cuisine)->all() : $this->recipes;
+        $recipes = $cuisine ? $this->paginate($this->recipes->where('recipe_cuisine', '=', $cuisine)) : $this->recipes;
 
         return $this->returnResponse($recipes);
     }
