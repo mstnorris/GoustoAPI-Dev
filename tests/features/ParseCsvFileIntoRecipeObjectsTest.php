@@ -108,7 +108,7 @@ class ParseCsvFileIntoRecipeObjectsTest extends TestCase
             ]);
     }
 
-    public function testCanRateAnExistingRecipe()
+    public function testCanRateARecipe()
     {
         $this->json('POST', '/api/v1/recipes/1', ['rating' => 3])
             ->seeJsonStructure([
@@ -146,5 +146,61 @@ class ParseCsvFileIntoRecipeObjectsTest extends TestCase
 
         $this->json('POST', '/api/v1/recipes/11', ['rating' => 3])
             ->seeJsonContains(["That recipe can't be found"]);
+    }
+
+    public function testCanUpdateAnExistingRecipe()
+    {
+        $this->json('PATCH', '/api/v1/recipes/1', ['title' => 'This is the updated title'])
+            ->seeJsonContains([
+                'id' => 1, 'title' => 'This is the updated title'
+            ])
+            ->dontSeeJson([
+                'title' => "Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad"
+            ]);
+
+        $this->json('PATCH', '/api/v1/recipes/1', ['title' => null])
+            ->seeJsonStructure([
+                'error_code',
+                'errors' => [
+                    'title' => []
+                ]
+            ])
+            ->seeJsonContains([
+                'error_code' => 422,
+                'errors' => [
+                    'title' => [
+                        "The title field is required."
+
+                    ]
+                ]
+            ]);
+    }
+
+    public function testCanStoreANewRecipe()
+    {
+        $this->json('POST', '/api/v1/recipes', ['title' => 'This is a new title'])
+            ->seeJsonContains([
+                'title' => 'This is a new title'
+            ])
+            ->dontSeeJson([
+                'title' => "This title doesn't exist"
+            ]);
+
+        $this->json('POST', '/api/v1/recipes', ['title' => null])
+            ->seeJsonStructure([
+                'error_code',
+                'errors' => [
+                    'title' => []
+                ]
+            ])
+            ->seeJsonContains([
+                'error_code' => 422,
+                'errors' => [
+                    'title' => [
+                        "The title field is required."
+
+                    ]
+                ]
+            ]);
     }
 }
