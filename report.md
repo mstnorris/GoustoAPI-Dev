@@ -27,21 +27,17 @@ I chose to use Laravel as that is what I have been working with for the last fou
 
 My solution meets the listed requirements fully, however I would not consider it 'production ready' as it does not address the following.
 
-#### Persistence - Updating a Recipe
+#### Persistence - Storing & Updating a Recipe
 
-When a recipe is updated, the changes are not persisted as this was not a requirement. It is usually something that would be carried out with a database of some description. However the API does make reasonable effort to validate the request.
+When a recipe is created or updated, the changes are not persisted as this was not a requirement (due to no database). However the API responds as if the persistence was successful and does make reasonable effort to validate the request.
 
 #### Persistence - Rating a Recipe
 
-Although the API end point responds to a rating request for a recipe, the data is not persisted in any way. As above, reasonable efforts are made to validate the request such that:
+Although the API end point responds to a rating request for a recipe, the data is not persisted in any way (as above). Also, reasonable efforts are made to validate the request such that:
 
 - The field is required
 - The value passed is an integer
 - The integer is between 1 and 5 (inclusive)
-
-#### Front-End
-
-No first-party front-end
 
 #### Authentication & Authorisation
 
@@ -59,3 +55,7 @@ I made informed decisions as to what the validations rules should be when updati
 #### Lack of Search & Other Filters
 
 As well as filtering by cuisine, it would be good to filter on al of the data points that a recipe contains; dietary requirements, calorie count etc. Also full-text search on the title and description etc would provide for a better user experience.
+
+#### JSON Response Maps Directly to Database
+
+The JSON response maps directly to that of the database structure. This is something that would benefit if I were to transform the output.

@@ -12,58 +12,139 @@ class ParseCsvFileIntoRecipeObjectsTest extends TestCase
      *
      * @return void
      */
-    public function testCanParseCSVFileIntoRecipeObjects()
+    public function testCanViewAllRecipes()
     {
-        $recipes = factory(App\Recipe::class, 3)->make();
+        $this->json('GET', '/api/v1/recipes')
+            ->seeJsonContains([
+                'id' => 1, 'title' => 'Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad'
+            ])
+            ->seeJsonContains([
+                'id' => 10, 'title' => 'Pork Katsu Curry'
+            ])
+            ->dontSeeJson([
+                'id' => 11, 'title' => "This title doesn't exist"
+            ]);
+    }
 
-        $testFilePath = storage_path('app/test.csv');
-        $actualFilePath = storage_path('app/recipes.csv');
+    public function testCanViewASingleRecipe()
+    {
+        $this->json('GET', '/api/v1/recipes/1')
+            ->seeJsonContains([
+                'id' => 1, 'title' => 'Sweet Chilli and Lime Beef on a Crunchy Fresh Noodle Salad'
+            ])
+            ->dontSeeJson([
+                'id' => 11, 'title' => "This title doesn't exist"
+            ]);
+    }
 
-        $fakeRecipe =
-            [
-                'id' => 1,
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
-                'box_type' => 'vegetarian',
-                'title' => 'Fennel Crusted Pork with Italian Butter Beans',
-                'slug' => 'fennel-crusted-pork-with-italian-butter-beans',
-                'short_title' => '',
-                'marketing_description' => 'A classic roast with a twist. The pork loin is marinated in rosemary, fennel seeds and chilli flakes then teamed with baked potato wedges and butter beans in tomato sauce. Enjoy within 5-6 days of delivery.',
-                'calories_kcal' => 511,
-                'protein_grams' => 11,
-                'fat_grams' => 61,
-                'carbs_grams' => 0,
-                'bulletpoint1' => 'A roast with a twist',
-                'bulletpoint2' => 'Low fat & high protein',
-                'bulletpoint3' => 'With roast potatoes',
-                'recipe_diet_type_id' => 'meat',
-                'season' => 'all',
-                'base' => 'beans/lentils',
-                'protein_source' => 'pork',
-                'preparation_time_minutes' => 45,
-                'shelf_life_days' => 4,
-                'equipment_needed' => 'Pestle & Mortar (optional)',
-                'origin_country' => 'Great Britain',
-                'recipe_cuisine' => 'british',
-                'in_your_box' => 'pork tenderloin, potatoes, butter beans, garlic, fennel seeds, medium onion, chilli flakes, fresh rosemary, tomatoes, vegetable stock cube',
-                'gousto_reference' => 55
-            ];
+    public function testCanViewRecipesByCuisine()
+    {
+        $this->json('GET', '/api/v1/recipes?cuisine=british')
+            ->seeJsonContains([
+                "total" => 4,
+                "per_page" => 2,
+                "current_page" => 1,
+                "last_page" => 2,
+                "next_page_url" => "/?page=2",
+                "prev_page_url" => null,
+                "from" => 1,
+                "to" => 2
+            ])
+            ->seeJsonContains([
+                'id' => 3, 'title' => 'Umbrian Wild Boar Salami Ragu with Linguine'
+            ])
+            ->seeJsonContains([
+                'id' => 4, 'title' => 'Tenderstem and Portobello Mushrooms with Corn Polenta'
+            ])
+            ->dontSeeJson([
+                "total" => 10,
+                "per_page" => 4,
+                "current_page" => 3,
+                "last_page" => 7,
+                "next_page_url" => "/?page=4",
+                "prev_page_url" => "/?page=8",
+                "from" => 3,
+                "to" => 6
+            ])
+            ->dontSeeJson([
+                'id' => 5, 'title' => 'Fennel Crusted Pork with Italian Butter Beans'
+            ])
+            ->dontSeeJson([
+                'id' => 7, 'title' => 'Courgette Pasta Rags'
+            ]);
 
-        $headers = implode(',', array_keys($fakeRecipe));
+        $this->json('GET', '/api/v1/recipes?cuisine=british&page=2')
+            ->seeJsonContains([
+                "total" => 4,
+                "per_page" => 2,
+                "current_page" => 2,
+                "last_page" => 2,
+                "next_page_url" => null,
+                "prev_page_url" => "/?page=1",
+                "from" => 3,
+                "to" => 4
+            ])
+            ->seeJsonContains([
+                'id' => 5, 'title' => 'Fennel Crusted Pork with Italian Butter Beans'
+            ])
+            ->seeJsonContains([
+                'id' => 7, 'title' => 'Courgette Pasta Rags'
+            ])
+            ->dontSeeJson([
+                "total" => 5,
+                "per_page" => 3,
+                "current_page" => 7,
+                "last_page" => 6,
+                "next_page_url" => "/?page=2",
+                "prev_page_url" => null,
+                "from" => 1,
+                "to" => 2
+            ])
+            ->dontSeeJson([
+                'id' => 3, 'title' => 'Umbrian Wild Boar Salami Ragu with Linguine'
+            ])
+            ->dontSeeJson([
+                'id' => 4, 'title' => 'Tenderstem and Portobello Mushrooms with Corn Polenta'
+            ]);
+    }
 
-        //$fakeRecipes = json_encode($fakeRecipes);
+    public function testCanRateAnExistingRecipe()
+    {
+        $this->json('POST', '/api/v1/recipes/1', ['rating' => 3])
+            ->seeJsonStructure([
+                'recipe',
+                'rating' => [
+                    'rating'
+                ]
+            ])
+            ->seeJsonContains([
+                'id' => 1
+            ])
+            ->dontSeeJson([
+                'id' => 3
+            ]);
 
-        File::put($testFilePath, $headers);
+        $this->json('POST', '/api/v1/recipes/1', ['rating' => 'notAnInteger'])
+            ->seeJsonStructure([
+                'error_code',
+                'errors' => [
+                    'rating' => []
+                ]
+            ])
+            ->seeJsonContains([
+                'error_code' => 422,
+                'errors' => [
+                    'rating' => [
+                        "The rating must be an integer.",
+                        "The rating must be between 1 and 5."
+                    ]
+                ]
+            ]);
 
+        $this->json('POST', '/api/v1/recipes/what', ['rating' => 3])
+            ->seeJsonContains(["That recipe can't be found"]);
 
-        File::append($testFilePath, implode(',', array_values($fakeRecipe)));
-
-//        $filePath = $testFilePath;
-//
-//        $recipes = Recipe::createFromCsvFile($filePath);
-//
-//        dd($recipes->first());
-
-
+        $this->json('POST', '/api/v1/recipes/11', ['rating' => 3])
+            ->seeJsonContains(["That recipe can't be found"]);
     }
 }

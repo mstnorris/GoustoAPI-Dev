@@ -19,7 +19,7 @@ class RecipeController extends Controller
 
     public function returnResponse($data, $statusCode = 200)
     {
-        return response($data, $statusCode, ['Content-Type' => 'application/json']);
+        return response()->json($data, $statusCode, ['Content-Type' => 'application/json']);
     }
 
     protected function paginate($items, $itemsPerPage = 2)
@@ -45,7 +45,7 @@ class RecipeController extends Controller
         $recipe = $this->recipes->find($id);
 
         if ( ! $recipe ) {
-            return $this->returnResponse("That recipe can't be found", 404);
+            return $this->returnResponse(["That recipe can't be found"], 404);
         }
 
         return $this->returnResponse($recipe, 200);
